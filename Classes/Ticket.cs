@@ -20,6 +20,8 @@ public class Ticket
         this.placa = placa;
         DefineEstado();
         DefineCodigo();
+        horaEntrada = new DateTime();
+        horaSaida = new DateTime();
         valor = 0;
     }
 
@@ -28,6 +30,8 @@ public class Ticket
         placa = "";
         estado = "";
         codigo = "";
+        horaEntrada = new DateTime();
+        horaSaida = new DateTime();
         valor = 0;
     }
 
@@ -43,7 +47,6 @@ public class Ticket
         {
             s += char.IsAsciiLetterOrDigit(Convert.ToChar(c + 1)) ? Convert.ToChar(c + 1) : char.IsAsciiLetter(Convert.ToChar(c)) ? "A" : "0";
         }
-
         codigo = s;
     }
 
@@ -105,6 +108,7 @@ public class Ticket
     public void SetHoraSaida(DateTime horaSaida)
     {
         this.horaSaida = horaSaida;
+        DefineValor();
     }
 
     public void SetValor(double valor)
