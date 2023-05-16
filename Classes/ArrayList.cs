@@ -1,6 +1,4 @@
-﻿using System.Reflection.Emit;
-
-namespace Controle_de_Estacionamento.Classes;
+﻿namespace Controle_de_Estacionamento.Classes;
 
 public class ArrayList<T>
 {
@@ -118,7 +116,6 @@ public class ArrayList<T>
     public override string ToString()
     {
         String s = "[";
-
         for (int i = 0; i < array.Length; i++)
         {
             s += "[";
@@ -135,7 +132,6 @@ public class ArrayList<T>
                 s += "]";
             }
         }
-
         return $"{s}]";
     }
 }
