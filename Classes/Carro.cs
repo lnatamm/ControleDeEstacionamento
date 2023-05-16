@@ -36,7 +36,7 @@ public class Carro
 
     public override string ToString()
     {
-        return $"Placa: {placa}\nTicket: \n{ticket}";
+        return $"Placa: {placa}\nTicket:\n{ticket}";
     }
 
 }
