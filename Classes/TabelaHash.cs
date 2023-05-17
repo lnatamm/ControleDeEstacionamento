@@ -23,7 +23,7 @@ public class TabelaHash
         {
             soma += c;
         }
-        return (soma % data.GetCodigo().Length) % tabela.Length;
+        return soma % tabela.Length;
     }
 
     public void Add(Ticket data)
