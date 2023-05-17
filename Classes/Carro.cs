@@ -2,7 +2,6 @@
 
 public class Carro
 {
-
     private string placa { get; set; }
 
     private Ticket ticket { get; set; }
@@ -36,7 +35,17 @@ public class Carro
 
     public override string ToString()
     {
-        return $"Placa: {placa}\nTicket:\n{ticket}";
+        return $"{placa}";
+    }
+
+    public override int GetHashCode()
+    {
+        int soma = 0;
+        foreach (char c in ticket.GetCodigo())
+        {
+            soma += c;
+        }
+        return soma;
     }
 
 }
