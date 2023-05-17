@@ -2,13 +2,13 @@
 
 public class Estacionamento
 {
-    private ArrayList<Carro> vagas;
+    private MatrizHashing<Carro> vagas;
 
     private TabelaHash ticketsRegistrados;
 
     public Estacionamento(int m, int n)
     {
-        vagas = new ArrayList<Carro>(m, n);
+        vagas = new MatrizHashing<Carro>(m, n);
         ticketsRegistrados = new TabelaHash(m * n);
     }
 
@@ -34,7 +34,7 @@ public class Estacionamento
         }
     }
 
-    public ArrayList<Carro> GetVagas()
+    public MatrizHashing<Carro> GetVagas()
     {
         return vagas;
     }
@@ -44,7 +44,7 @@ public class Estacionamento
         return ticketsRegistrados;
     }
 
-    public void SetVagas(ArrayList<Carro> vagas)
+    public void SetVagas(MatrizHashing<Carro> vagas)
     {
         this.vagas = vagas;
     }
