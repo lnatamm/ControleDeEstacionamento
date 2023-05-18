@@ -3,6 +3,8 @@
 public class Ticket
 {
 
+    private LeitorDePlaca leitor { get; set; }
+
     private string placa { get; set; }
 
     private string estado { get; set; }
@@ -13,11 +15,12 @@ public class Ticket
 
     private DateTime horaSaida { get; set; }
 
-    private double valor { get; set; }
+    private int valor { get; set; }
 
     public Ticket(string placa)
     {
         this.placa = placa;
+        leitor = new LeitorDePlaca();
         DefineEstado();
         DefineCodigo();
         horaEntrada = new DateTime();
@@ -37,7 +40,7 @@ public class Ticket
 
     private void DefineEstado()
     {
-
+        estado = leitor.GetEstado(placa);
     }
 
     private void DefineCodigo()
@@ -60,6 +63,11 @@ public class Ticket
     {
         int tempoTeto = (int)Math.Ceiling(TempoDecorrido());
         valor = tempoTeto < 0.25 ? 0 : tempoTeto < 3 ? 8 : (tempoTeto * 2) + 8;
+    }
+
+    public LeitorDePlaca GetLeitor()
+    {
+        return leitor;
     }
 
     public string GetPlaca()
@@ -87,9 +95,14 @@ public class Ticket
         return horaSaida;
     }
 
-    public double GetValor() 
+    public int GetValor() 
     {
         return valor;
+    }
+
+    public void SetLeitor(LeitorDePlaca leitor)
+    {
+        this.leitor = leitor;
     }
 
     public void SetPlaca(string placa)
@@ -118,14 +131,14 @@ public class Ticket
         DefineValor();
     }
 
-    public void SetValor(double valor)
+    public void SetValor(int valor)
     {
         this.valor = valor;
     }
 
     public override string ToString()
     {
-        return $"Placa: {placa}\nEstado: {estado}\nCodigo do Ticket: {codigo}\nHora de Entrada: {horaEntrada.Hour}h{horaEntrada.Minute}m\nHora de Saída: {horaSaida.Hour}h{horaSaida.Minute}m\nValor Cobrado: {valor}\n";
+        return valor < 10 ? $"Placa: {placa}\nEstado: {estado}\nCodigo do Ticket: {codigo}\nHora de Entrada: {horaEntrada.Hour}h{horaEntrada.Minute}m\nHora de Saída: {horaSaida.Hour}h{horaSaida.Minute}m\nValor Cobrado: R$0{valor}.00\n" : $"Placa: {placa}\nEstado: {estado}\nCodigo do Ticket: {codigo}\nHora de Entrada: {horaEntrada.Hour}h{horaEntrada.Minute}m\nHora de Saída: {horaSaida.Hour}h{horaSaida.Minute}m\nValor Cobrado: R${valor}.00\n";
     }
 
 }
