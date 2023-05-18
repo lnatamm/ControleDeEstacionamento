@@ -50,9 +50,16 @@ public class Ticket
         codigo = s;
     }
 
+    private double TempoDecorrido()
+    {
+        TimeSpan diferenca = horaSaida - horaEntrada;
+        return diferenca.TotalHours;
+    }
+
     private void DefineValor()
     {
-
+        int tempoTeto = (int)Math.Ceiling(TempoDecorrido());
+        valor = tempoTeto < 0.25 ? 0 : tempoTeto < 3 ? 8 : (tempoTeto * 2) + 8;
     }
 
     public string GetPlaca()
@@ -118,7 +125,7 @@ public class Ticket
 
     public override string ToString()
     {
-        return $"Placa: {placa}\nEstado: {estado}\nCodigo do Ticket: {codigo}\nHora de Entrada: {horaEntrada.Hour}\nHora de Saída: {horaSaida.Hour}\nValor Cobrado: {valor}\n";
+        return $"Placa: {placa}\nEstado: {estado}\nCodigo do Ticket: {codigo}\nHora de Entrada: {horaEntrada.Hour}h{horaEntrada.Minute}m\nHora de Saída: {horaSaida.Hour}h{horaSaida.Minute}m\nValor Cobrado: {valor}\n";
     }
 
 }
