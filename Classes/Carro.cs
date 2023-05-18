@@ -33,9 +33,14 @@ public class Carro
         this.placa = placa;
     }
 
+    public string Mostra()
+    {
+        return $"Placa: {placa}\nTicket : {ticket}";
+    }
+
     public override string ToString()
     {
-        return $"{placa}";
+        return placa;
     }
 
     public override int GetHashCode()
