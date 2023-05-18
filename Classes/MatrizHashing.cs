@@ -1,26 +1,26 @@
 ﻿namespace Controle_de_Estacionamento.Classes;
-public class MatrizHashing<T>
+public class MatrizHashing
 {
-    private T[][] array;
+    private Carro[][] array;
 
     private int count;
 
     public MatrizHashing(int m, int n)
     {
-        array = new T[m][];
+        array = new Carro[m][];
         for (int i = 0; i < m; i++)
         {
-            array[i] = new T[n];
+            array[i] = new Carro[n];
         }
         count = 0;
     }
 
-    private int Hashing(T data)
+    private int Hashing(Carro data)
     {
         return data.GetHashCode() % array.Length;
     }
 
-    public void Add(T data)
+    public void Add(Carro data)
     {
         int hash = Hashing(data);
         int index = hash;
@@ -48,19 +48,19 @@ public class MatrizHashing<T>
         {
             for (int j = 0; j < array[i].Length; j++)
             {
-                array[i][j] = default(T);
+                array[i][j] = null;
             }
         }
     }
 
-    public bool Contains(T data)
+    public bool Contains(Carro data)
     {
         int hash = Hashing(data);
         int index = hash;
         int i = 1;
         while (array[index / array[0].Length][index % array[0].Length] != null)
         {
-            if (array[index / array[0].Length][index % array[0].Length].Equals(data)){
+            if (array[index / array[0].Length][index % array[0].Length].GetPlaca() == data.GetPlaca()){
                 return true;
             }
             index = (hash + (i * i)) % (array.Length * array[0].Length);
@@ -79,22 +79,23 @@ public class MatrizHashing<T>
         {
             if (n < array[m].Length)
             {
-                array[m][n] = default(T);
+                array[m][n] = null;
                 count--;
             }
         }
     }
 
-    public void Remove(T data)
+    public void Remove(Carro data)
     {
         int hash = Hashing(data);
         int index = hash;
         int i = 1;
         while (array[index / array[0].Length][index % array[0].Length] != null)
         {
-            if (array[index / array[0].Length][index % array[0].Length].Equals(data))
+            if (array[index / array[0].Length][index % array[0].Length].GetPlaca() == data.GetPlaca())
             {
-                array[index / array[0].Length][index % array[0].Length] = default(T);
+                array[index / array[0].Length][index % array[0].Length] = null;
+                count--;
                 return;
             }
             index = (hash + (i * i)) % (array.Length * array[0].Length);
@@ -106,19 +107,19 @@ public class MatrizHashing<T>
         }
     }
 
-    public T Get(int m, int n)
+    public Carro Get(int m, int n)
     {
         return array[m][n];
     }
 
-    public int[] IndexOf(T data)
+    public int[] IndexOf(Carro data)
     {
         int hash = Hashing(data);
         int index = hash;
         int i = 1;
         while (array[index / array[0].Length][index % array[0].Length] != null)
         {
-            if (array[index / array[0].Length][index % array[0].Length].Equals(data))
+            if (array[index / array[0].Length][index % array[0].Length].GetPlaca() == data.GetPlaca())
             {
                 return new int[] { index / array[0].Length, index % array[0].Length };
             }
