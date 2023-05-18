@@ -101,6 +101,7 @@ internal class Program
                 Console.Write("Minuto: ");
                 int minuto = InputTime();
                 estacionamento.RemoverCarro(new Carro(placa), new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hora, minuto, 0));
+                Console.WriteLine(estacionamento);
             }
             if (controle == 3)
             {
