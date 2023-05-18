@@ -142,6 +142,7 @@ public class MatrizHashing
                     if (i[0] == m && i[1] == n)
                     {
                         posicoesPreenchidas.Remove(i);
+                        break;
                     }
                 }
                 count--;
