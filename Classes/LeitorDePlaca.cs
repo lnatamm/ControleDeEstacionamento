@@ -77,14 +77,14 @@ public class LeitorDePlaca
         Loopar(santaCatarina, 'R', 'X', 'K', 'R', 'Y', 'I');
     }
 
-    private void QuebraCaracteres(string placa)
+    private string QuebraCaracteres(string placa)
     {
-        placa = Converter(placa[0]) + Converter(placa[1]) + Converter(placa[2]);
+        return Converter(placa[0]) + Converter(placa[1]) + Converter(placa[2]);
     }
 
     public string GetEstado(string placa)
     {
-        QuebraCaracteres(placa);
+        placa = QuebraCaracteres(placa);
         return parana.Contains(placa) ? "Paraná" : rioGrandeDoSul.Contains(placa) ? "Rio Grande do Sul" : santaCatarina.Contains(placa) ? "Santa Catarina" : "Estado não registrado";
     }
 
