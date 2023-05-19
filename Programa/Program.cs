@@ -24,7 +24,6 @@ internal class Program
             }
             return placa;
         }
-        
     }
 
     public static int Input()
@@ -85,6 +84,21 @@ internal class Program
         }
     }
 
+    public static DateTime DefineHoraSaida(int hora, int minuto, DateTime horaEntrada)
+    {
+        Console.WriteLine("Digite a Hora e o Minuto de Saída:");
+        Console.Write("Hora: ");
+        hora = InputTime();
+        Console.Write("Minuto: ");
+        minuto = InputTime();
+        DateTime horaSaida = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hora, minuto, 0);
+        if (horaEntrada.CompareTo(horaSaida) > 0)
+        {
+            return DefineHoraSaida(hora, minuto, horaEntrada);
+        }
+        return horaSaida;
+    }
+
     public static void Main(string[] args)
     {
         int controle = -1;
@@ -113,12 +127,10 @@ internal class Program
                 Console.WriteLine("Digite a Placa do Carro");
                 string placa = InputPlaca();
                 if (estacionamento.GetVagas().Contains(new Carro(placa))){
-                    Console.WriteLine("Digite a Hora e o Minuto de Saída");
-                    Console.Write("Hora: ");
-                    int hora = InputTime();
-                    Console.Write("Minuto: ");
-                    int minuto = InputTime();
-                    estacionamento.RemoverCarro(new Carro(placa), new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hora, minuto, 0));
+                    int hora = 0, minuto = 0;
+                    int[] index = estacionamento.GetVagas().IndexOf(new Carro(placa));
+                    DateTime horaSaida = DefineHoraSaida(hora, minuto, estacionamento.GetVagas().Get(index[0], index[1]).GetTicket().GetHoraEntrada());
+                    estacionamento.RemoverCarro(new Carro(placa), horaSaida);
                     Console.WriteLine(estacionamento);
                 }
                 else
