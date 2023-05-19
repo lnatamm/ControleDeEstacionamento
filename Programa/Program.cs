@@ -40,18 +40,33 @@ internal class Program
         }
     }
 
-    public static int InputTime()
+    public static int InputHora()
     {
         int input = 0;
         try
         {
             input = Convert.ToInt32(Console.ReadLine());
-            return input >= 0 ? input : InputTime();
+            return input < 0 ? InputHora() : input < 24 ? input : InputHora();
         }
         catch
         {
             Console.WriteLine("Insira Apenas Números");
-            return InputTime();
+            return InputHora();
+        }
+    }
+
+    public static int InputMinuto()
+    {
+        int input = 0;
+        try
+        {
+            input = Convert.ToInt32(Console.ReadLine());
+            return input < 0 ? InputMinuto() : input < 60 ? input : InputMinuto();
+        }
+        catch
+        {
+            Console.WriteLine("Insira Apenas Números");
+            return InputHora();
         }
     }
 
@@ -88,13 +103,13 @@ internal class Program
     {
         Console.WriteLine("Digite a Hora e o Minuto de Saída:");
         Console.Write("Hora: ");
-        hora = InputTime();
+        hora = InputHora();
         Console.Write("Minuto: ");
-        minuto = InputTime();
+        minuto = InputMinuto();
         DateTime horaSaida = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hora, minuto, 0);
         if (horaEntrada.CompareTo(horaSaida) > 0)
         {
-            return DefineHoraSaida(hora, minuto, horaEntrada);
+            horaSaida = horaSaida.AddDays(1);
         }
         return horaSaida;
     }
@@ -116,9 +131,9 @@ internal class Program
                 string placa = InputPlaca();
                 Console.WriteLine("Digite a Hora e o Minuto de Entrada:");
                 Console.Write("Hora: ");
-                int hora = InputTime();
+                int hora = InputHora();
                 Console.Write("Minuto: ");
-                int minuto = InputTime();
+                int minuto = InputMinuto();
                 estacionamento.InserirCarro(new Carro(placa), new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hora, minuto, 0));
                 Console.WriteLine(estacionamento);
             }
