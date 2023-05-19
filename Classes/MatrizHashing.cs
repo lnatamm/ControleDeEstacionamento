@@ -1,4 +1,6 @@
-﻿namespace Controle_de_Estacionamento.Classes;
+﻿using System.Numerics;
+
+namespace Controle_de_Estacionamento.Classes;
 public class MatrizHashing
 {
     private Carro[][] array;
@@ -73,18 +75,31 @@ public class MatrizHashing
         }
     }
 
+    private DateTime DefineHoraSaida(int hora, int minuto, DateTime horaEntrada)
+    {
+        Console.WriteLine("Digite a Hora e o Minuto de Saída:");
+        Console.Write("Hora: ");
+        hora = InputTime();
+        Console.Write("Minuto: ");
+        minuto = InputTime();
+        DateTime horaSaida = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hora, minuto, 0);
+        if (horaEntrada.CompareTo(horaSaida) > 0)
+        {
+            return DefineHoraSaida(hora, minuto, horaEntrada);
+        }
+        return horaSaida;
+    }
+
     public void Clear()
     {
         for(int i = 0; i < posicoesPreenchidas.Count; i++)
         {
-            Console.WriteLine($"Placa: {array[posicoesPreenchidas[i][0]][posicoesPreenchidas[i][1]].GetPlaca()}");
-            Console.WriteLine("Digite a Hora e o Minuto de Saída");
-            Console.Write("Hora: ");
-            int hora = InputTime();
-            Console.Write("Minuto: ");
-            int minuto = InputTime();
-            array[posicoesPreenchidas[i][0]][posicoesPreenchidas[i][1]].GetTicket().SetHoraSaida(new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hora, minuto, 0));
-            Console.WriteLine(array[posicoesPreenchidas[i][0]][posicoesPreenchidas[i][1]].GetTicket());
+            Carro c = array[posicoesPreenchidas[i][0]][posicoesPreenchidas[i][1]];
+            Console.WriteLine($"Placa: {c.GetPlaca()}");
+            int hora = 0, minuto = 0;
+            DateTime horaSaida = DefineHoraSaida(hora, minuto, c.GetTicket().GetHoraEntrada());
+            c.GetTicket().SetHoraSaida(horaSaida);
+            Console.WriteLine(c.GetTicket());
             array[posicoesPreenchidas[i][0]][posicoesPreenchidas[i][1]] = null;
             posicoesPreenchidas.RemoveAt(i);
             Clear();
