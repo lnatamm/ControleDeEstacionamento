@@ -61,8 +61,21 @@ public class Ticket
 
     private void DefineValor()
     {
-        int tempoTeto = (int)Math.Ceiling(TempoDecorrido());
-        valor = tempoTeto < 0.25 ? 0 : tempoTeto < 3 ? 8 : (tempoTeto * 2) + 8;
+        double fracaoHora = TempoDecorrido();
+        int tempoTeto;
+        if(fracaoHora < 0.25)
+        {
+            valor = 0;
+        }
+        else if(fracaoHora < 3)
+        {
+            valor = 8;
+        }
+        else
+        {
+            tempoTeto = (int)Math.Ceiling(fracaoHora);
+            valor = ((tempoTeto - 3) * 2) + 8;
+        }
     }
 
     public LeitorDePlaca GetLeitor()
