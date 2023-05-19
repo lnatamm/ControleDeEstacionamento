@@ -60,18 +60,33 @@ public class MatrizHashing
         return count;
     }
 
-    private int InputTime()
+    private int InputHora()
     {
         int input = 0;
         try
         {
             input = Convert.ToInt32(Console.ReadLine());
-            return input >= 0 ? input : InputTime();
+            return input < 0 ? InputHora() : input < 24 ? input : InputHora();
         }
         catch
         {
             Console.WriteLine("Insira Apenas Números");
-            return InputTime();
+            return InputHora();
+        }
+    }
+
+    private int InputMinuto()
+    {
+        int input = 0;
+        try
+        {
+            input = Convert.ToInt32(Console.ReadLine());
+            return input < 0 ? InputMinuto() : input < 60 ? input : InputMinuto();
+        }
+        catch
+        {
+            Console.WriteLine("Insira Apenas Números");
+            return InputHora();
         }
     }
 
@@ -79,13 +94,13 @@ public class MatrizHashing
     {
         Console.WriteLine("Digite a Hora e o Minuto de Saída:");
         Console.Write("Hora: ");
-        hora = InputTime();
+        hora = InputHora();
         Console.Write("Minuto: ");
-        minuto = InputTime();
+        minuto = InputMinuto();
         DateTime horaSaida = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hora, minuto, 0);
         if (horaEntrada.CompareTo(horaSaida) > 0)
         {
-            return DefineHoraSaida(hora, minuto, horaEntrada);
+            horaSaida = horaSaida.AddDays(1);
         }
         return horaSaida;
     }
