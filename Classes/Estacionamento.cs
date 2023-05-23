@@ -18,10 +18,13 @@ public class Estacionamento
     }
 
     public void InserirCarro(Carro carro, DateTime horaEntrada)
-    {   
-        carro.GetTicket().SetHoraEntrada(horaEntrada);
-        vagas.Add(carro);
-        ticketsRegistrados.Add(carro.GetTicket());
+    {
+        if (!vagas.Contains(carro))
+        {
+            carro.GetTicket().SetHoraEntrada(horaEntrada);
+            vagas.Add(carro);
+            ticketsRegistrados.Add(carro.GetTicket());
+        }
     }
 
     public void RemoverCarro(Carro carro, DateTime horaSaida)
