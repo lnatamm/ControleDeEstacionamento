@@ -11,11 +11,11 @@ public class MatrizHashing
 
     public MatrizHashing(int m, int n)
     {
-        array = new Carro[m][];
+        array = new Carro[n][];
         posicoesPreenchidas = new List<int[]>();
-        for (int i = 0; i < m; i++)
+        for (int i = 0; i < n; i++)
         {
-            array[i] = new Carro[n];
+            array[i] = new Carro[m];
         }
         count = 0;
     }
@@ -110,11 +110,11 @@ public class MatrizHashing
         for(int i = 0; i < posicoesPreenchidas.Count; i++)
         {
             Carro c = array[posicoesPreenchidas[i][0]][posicoesPreenchidas[i][1]];
-            Console.WriteLine($"Placa: {c.GetPlaca()}");
+            Console.WriteLine($"\nPlaca: {c.GetPlaca()}");
             int hora = 0, minuto = 0;
             DateTime horaSaida = DefineHoraSaida(hora, minuto, c.GetTicket().GetHoraEntrada());
             c.GetTicket().SetHoraSaida(horaSaida);
-            Console.WriteLine(c.GetTicket());
+            Console.WriteLine($"\n{c.GetTicket()}");
             array[posicoesPreenchidas[i][0]][posicoesPreenchidas[i][1]] = null;
             posicoesPreenchidas.RemoveAt(i);
             Clear();
@@ -272,14 +272,22 @@ public class MatrizHashing
     public override string ToString()
     {
         string s = "";
-        for (int i = 0; i < array.Length; i++)
+        int size = array[0].Length;
+        for (int i = 0; i < size; i++)
         {
-            s += "[";
-            for (int j = 0; j < array[i].Length - 1; j++)
+            s += "|";
+            for (int j = 0; j < array.Length; j++)
             {
-                s += array[i][j] + ", ";
+                if (array[j][i] != null)
+                {
+                    s += array[j][i] + "|";
+                }
+                else
+                {
+                    s += "       |";
+                }
             }
-            s += $"{array[i][array[i].Length - 1]}]{Environment.NewLine}";
+            s += Environment.NewLine;
         }
         return s;
     }
