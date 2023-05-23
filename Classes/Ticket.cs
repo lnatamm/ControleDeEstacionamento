@@ -151,7 +151,7 @@ public class Ticket
 
     public override string ToString()
     {
-        return valor < 10 ? $"Placa: {placa}\nEstado: {estado}\nCodigo do Ticket: {codigo}\nHora de Entrada: {horaEntrada.Hour}h{horaEntrada.Minute}m\nHora de Saída: {horaSaida.Hour}h{horaSaida.Minute}m\nValor Cobrado: R$0{valor}.00\n" : $"Placa: {placa}\nEstado: {estado}\nCodigo do Ticket: {codigo}\nHora de Entrada: {horaEntrada.Hour}h{horaEntrada.Minute}m\nHora de Saída: {horaSaida.Hour}h{horaSaida.Minute}m\nValor Cobrado: R${valor}.00\n";
+        return valor < 10 ? $"Placa: {placa}\nEstado: {estado}\nCodigo do Ticket: {codigo}\nHora de Entrada: {horaEntrada.Hour}h{horaEntrada.Minute}m\nHora de Saída: {horaSaida.Hour}h{horaSaida.Minute}m\nValor Cobrado: R$0{valor}.00" : $"Placa: {placa}\nEstado: {estado}\nCodigo do Ticket: {codigo}\nHora de Entrada: {horaEntrada.Hour}h{horaEntrada.Minute}m\nHora de Saída: {horaSaida.Hour}h{horaSaida.Minute}m\nValor Cobrado: R${valor}.00";
     }
 
 }

@@ -135,7 +135,7 @@ internal class Program
                 Console.Write("Minuto: ");
                 int minuto = InputMinuto();
                 estacionamento.InserirCarro(new Carro(placa), new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hora, minuto, 0));
-                Console.WriteLine(estacionamento);
+                Console.WriteLine($"\n{estacionamento}");
             }
             if(controle == 2)
             {
@@ -146,7 +146,7 @@ internal class Program
                     int[] index = estacionamento.GetVagas().IndexOf(new Carro(placa));
                     DateTime horaSaida = DefineHoraSaida(hora, minuto, estacionamento.GetVagas().Get(index[0], index[1]).GetTicket().GetHoraEntrada());
                     estacionamento.RemoverCarro(new Carro(placa), horaSaida);
-                    Console.WriteLine(estacionamento);
+                    Console.WriteLine($"\n{estacionamento}");
                 }
                 else
                 {
@@ -158,12 +158,12 @@ internal class Program
                 Console.WriteLine("Digite a Placa do Carro");
                 string placa = InputPlaca();
                 if(estacionamento.GetVagas().Contains(new Carro(placa))){
-                    Console.WriteLine(estacionamento.ExibirDetalhes(new Carro(placa)));
+                    Console.WriteLine($"\n{estacionamento.ExibirDetalhes(new Carro(placa))}\n");
                 }                
             }
             if (controle == 4)
             {
-                Console.WriteLine(estacionamento);
+                Console.WriteLine($"\n{estacionamento}");
             }
             if(controle == 5)
             {
