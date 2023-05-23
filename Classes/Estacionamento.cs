@@ -31,7 +31,7 @@ public class Estacionamento
             int[] index = vagas.IndexOf(carro);
             Carro c = vagas.Get(index[0], index[1]);
             c.GetTicket().SetHoraSaida(horaSaida);
-            Console.WriteLine(c.GetTicket());
+            Console.WriteLine($"\n{c.GetTicket()}");
             vagas.Remove(carro);
             ticketsRegistrados.Remove(carro.GetTicket());
         }
@@ -50,7 +50,7 @@ public class Estacionamento
     public void RemoverTodos()
     {
         vagas.Clear();
-        Console.WriteLine(vagas);
+        Console.WriteLine($"\n{vagas}");
     }
 
     public MatrizHashing GetVagas()
